@@ -1,0 +1,77 @@
+\documentclass[12pt]{beamer}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Appearance
+\mode<presentation>
+{
+	\usetheme{CambridgeUS}
+	\usecolortheme{whale}
+	\setbeamercovered{transparent}
+}
+% Redefine beamer colors
+% Captions and titles
+\setbeamertemplate{caption}{\raggedright\insertcaption} 
+\setbeamercolor{frametitle}{fg=cyan!90!black}
+\setbeamercolor{title}{bg=cyan!90!black}
+
+\setbeamercolor{palette primary}{fg=white, bg=cyan!70!black}
+\setbeamercolor{palette secondary}{fg=white, bg=cyan!50!black}
+\setbeamercolor{palette tertiary}{fg=white, bg=cyan!90!black}
+% Outline slide
+\setbeamertemplate{section in toc}[circle]
+\setbeamerfont{section number projected}{family=\rmfamily,series=\bfseries,size=\normalsize}
+\setbeamercolor{section number projected}{bg=cyan!90!black,fg=white}
+% Itemize list
+\setbeamertemplate{itemize item}[circle]
+\setbeamertemplate{itemize subitem}[circle]
+\setbeamercolor{itemize item}{fg=cyan!70!black}
+\setbeamercolor{itemize subitemitem}{fg=cyan!90!black}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliography
+\usepackage[backend=bibtex,style=ieee]{biblatex} % bibliography
+\bibliography{Bibliography-thesis}
+\renewcommand*{\bibfont}{\footnotesize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[english]{babel}
+\usepackage{color} %Invoke options usenames,dvipsnames for larger color choice
+\usepackage{multicol} % Used for the two-column layout of the document
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,mathrsfs,amsfonts,amsthm} % for maths
+\usepackage{eucal}    % for curly math letter symbols
+\usepackage{amssymb}  % for ams symbols
+\usepackage{pgfplots}
+\pgfplotsset{every axis/.append style={line width=1pt}}
+\usetikzlibrary{shapes,shadows,arrows,backgrounds,patterns,positioning,automata,calc,decorations.markings,decorations.pathreplacing,bayesnet,arrows.meta}
+\usepackage[latin1]{inputenc}
+\usepackage{array} % To vertically center tabular content 
+\usepackage{times}
+\usepackage[T1]{fontenc}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Populate title page
+\title[Identification of immune cell migration] % (optional, use only with long paper titles)
+{Modelling and Identification of Immune Cell Migration during the Inflammatory response}
+\author[A. Kadochnikova]{A. Kadochnikova\inst{1}}
+\institute[ACSE,TUoS]{\inst{1}
+	Department of Automatic Control and Systems Engineering\\
+	The University of Sheffield}
+\date[21/06/2019]{21 June 2019}
+
+\pgfdeclareimage[height=1cm]{university-logo}{UoSarms.pdf}
+\logo{\pgfuseimage{university-logo}}
+\begin{document}
+\begin{frame}
+	\titlepage
+\end{frame}
+\begin{frame}{Outline}
+\tableofcontents[hideallsubsections]
+\end{frame}
+\section{Test section 1}
+\begin{frame}
+Test test test
+\end{frame}
+\section{Test section 2}
+\begin{frame}
+Test test test
+\end{frame}
+\end{document}
