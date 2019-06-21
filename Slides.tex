@@ -24,7 +24,7 @@
 \setbeamertemplate{itemize item}[circle]
 \setbeamertemplate{itemize subitem}[circle]
 \setbeamercolor{itemize item}{fg=cyan!70!black}
-\setbeamercolor{itemize subitemitem}{fg=cyan!90!black}
+\setbeamercolor{itemize subitemitem}{fg=cyan!70!black}
 % Title box
 \setbeamertemplate{frametitle}{%
 	\nointerlineskip%
@@ -111,26 +111,10 @@
 \section[Background]{Background \& Motivation}
 \subsection{Neutrophils in inflammation}
 \begin{frame}
-\begin{itemize}
-	\item The process of inflammation is driven by rapid migration of neutrophils towards and away from the infectious area.
-	\item Chemotaxis - directed migration in response to chemical attractants - is the dominant mechanism of neutrophil recruitment.
-	\item Neutrophil reverse migration hypotheses: driven away by repellents vs. random redistribution.
-	\item Cell locomotion is linked to gradient sensing by changes in subcellular concentrations of various messengers.
-	\item Majority of therapeutic treatments of inflammation rely on manipulating cells' presentation of their environment. 
-\end{itemize}
-Mathematical modelling is a standard method for characterisation of the experimental data.
+
 \end{frame}
 \subsection{Identified gaps in literature}
 \begin{frame}
-General problem: abundance of mathematical models without predictive capability.\\
-\vspace{0.2cm}
-Specific gaps in literature:
-\begin{itemize}
-	\item Chemoattractant concentrations must be inferred from \textit{in vivo} experiments.
-	\item Random walk models do not provide insight into global environment influence.
-	\item No studies contemplating the possibility heterogeneous cell behaviour during the resolution stage.
-	\item PIP$_3$ is often assumed as the primary subcellular regulator without experimental evidence.
-\end{itemize}
 \vspace{0.2cm}
 \centering
 \only<1>{\large{Common concept:\\ Complicated model $\rightarrow$ Realistic simulations.}}\only<2>{\large{Systematic approach:\\ Simplified models $\rightarrow$ Linking to data $\rightarrow$ Meaningful perditions.}}
@@ -139,8 +123,8 @@ Specific gaps in literature:
 \begin{frame}
 Objectives:
 \begin{itemize}
-	\item Develop a dynamical model that describes cell interaction with the acting environment.
-	\item Data-driven estimation of global chemoattractant concentration field and cell behavioural modes.
+	\item Develop a dynamical model that describes cell interaction with the global environment.
+	\item Data-driven estimation of global chemoattractant concentration and cell behavioural modes.
 	\item Parameter estimation of neutrophil morphodynamics model.
 \end{itemize}
 \vspace{0.3cm}
@@ -148,13 +132,13 @@ Restrictions:
   \begin{itemize}
   	\item Minimise prior assumptions about the shape of the environment.
   	\item Minimise prior assumptions about the subcellular regulators.
-  	\item Ensure identifiability of models by keeping the number of unknown parameters low. 
+  	\item Ensure identifiability of models. 
   	\end{itemize}
 \end{frame}
 %% Chapters 3-5
 \section{Environment inference: homogeneous cell behaviour}
 \subsection{Problem statement}
-\begin{frame}
+\begin{frame}{Hidden chemoattractant}
 \begin{columns}
 	\begin{column}{0.55\textwidth}
 		\centering
@@ -173,25 +157,26 @@ Restrictions:
 	\end{column}
 \end{columns}
 \bigskip
-\uncover<6->{1. Develop a parametrised finite-order model of global $\mathcal{U}(\mathbfit{s})$.\\}
+\invisible<1-5>{1. Develop a parametrised finite-order model of global $\mathcal{U}(\mathbfit{s})$.\\}
 \bigskip
-\uncover<7->{2. Estimate hidden global $\mathcal{U}(\mathbfit{s})$ from localised data $\mathcal{Y}$.}
+\invisible<1-6>{2. Estimate unobserved $\mathcal{U}(\mathbfit{s})$ from localised tracking data $\mathcal{Y}$.}
+\invisible<1-7>{\tiny{2. Estimate unobserved $\mathcal{U}(\mathbfit{s})$ from localised tracking data $\mathcal{Y}$.}}
 \end{frame}
 \begin{frame}{Defining assumptions}
 \begin{itemize}
-	\item A migrating call is moving as a massive Brownian particle:
+	\item<1-> A migrating call is moving as a massive Brownian particle:
 	\begin{equation*}
 	\dot{v}(t)= - \rho v(t) + \sqrt{\sigma}\mathbf{W}(t).
 	\end{equation*}
-	\item Each cell at each time is moving in response to the acting environment:
+	\item<2-> Each cell at each time is moving in response to the acting environment:
 	\begin{equation*}
 	\dot{v}(t) = - \rho v(t) + \sqrt{\sigma}\mathbf{W}(t) + {\psi}(t).
 	\end{equation*}
-	\item Hidden chemoattractant environment is acting on cells as a potential field:
+	\item<3-> Hidden chemoattractant environment is acting on cells as a potential field:
 	\begin{equation*}
 	\dot{v}(t) = - \rho v(t) + \sqrt{\sigma}\mathbf{W}(t) + \nabla\mathcal{U}(s(t)).
 	\end{equation*}
-	\item Hidden chemoattractant environment is time-invariant:
+	\item<4-> Hidden chemoattractant environment is time-invariant:
 	\begin{equation*}
 	\mathcal{U}(t) = const.
 	\end{equation*}
@@ -266,9 +251,9 @@ C = \left[ \begin{array}{cc}
 \end{array}\right].
 \end{equation*}
 \vspace{0.3cm}
-SSM is linear in $\Theta$ and non-linear in $\mathbfit{x}$.   
+SMM is linear in $\Theta$ and non-linear in $\mathbfit{x}$.   
 \end{frame}
-\begin{frame}{Approximate EM framework}
+\begin{frame}{Approximate ML estimation}
 E-step:
 \vspace{-0.5cm}
 \begin{equation*}
@@ -394,7 +379,7 @@ M-step:\\
 
 \section{Environment inference: heterogeneous cell behaviour}
 \subsection{Problem statement}
-\begin{frame}
+\begin{frame}{Heterogeneous cell behaviour}
 \begin{columns}
 	\begin{column}{0.5\textwidth}
 		\centering
@@ -406,11 +391,11 @@ M-step:\\
 		\vspace{0.29cm}
 	\end{column}
 \end{columns}
-Neutrophil behaviour is not uniform.\\
+\invisible<1>{1. Determine whether a cell at a given time interacts with the environment $\mathcal{U}(\mathbfit{s})$.\\}
 \vspace{0.2cm}
-\uncover<2->{1. Does a cell at a given time interact with the environment $\mathcal{U}(\mathbfit{s})$?\\}
-\vspace{0.2cm}
-\uncover<3->{2. Estimate hidden global $\mathcal{U}(\mathbfit{s})$ from the interaction with responsive  cells.}
+\invisible<1-2>{2. Estimate unobserved $\mathcal{U}(\mathbfit{s})$ from the interaction with responsive  cells.}
+\invisible<1-3>{\tiny{2. Estimate unobserved $\mathcal{U}(\mathbfit{s})$ from the interaction with responsive  cells.}}
+
 \end{frame}
 \begin{frame}{Defining assumptions (upd.)}
 Remain the same:
@@ -420,22 +405,27 @@ Remain the same:
 	\item Hidden chemoattractant environment is time-invariant.
 \end{itemize}
 \vspace{0.3cm}
-Relaxed assumptions:
+\uncover<1->{Relaxed assumptions:
 \begin{itemize}
 	\item Each migrating cell at any time can be in one of free modes: stationary, responsive or non-responsive.
 	\item Switching between modes happens randomly.
 	\item Each behavioural mode can be reached from any other mode.
-\end{itemize}
+\end{itemize}}
 \end{frame}
 \subsection{Methods}
 \begin{frame}{Jump Markov system}
 \vspace{-1cm}
-\begin{equation*}\label{eq_dyn1}
-\mathbfit{x}_{\td}^{\kd} = A(M^j)\mathbfit{x}_{\td-1}^{\kd} + B(M^j)\phi_{\td-1}^{\kd}(s_{\mathrm{x}},s_{\mathrm{y}}) \Theta + G(M^j)\mathbfit{w}_{\td-1}^{\kd}, \quad \mathbfit{w}_{\td}^{\kd} \sim \mathcal{N}(0,Q(M^j)).
+\begin{equation*}
+\begin{split}
+\mathbfit{x}_{\td}^{\kd} &= A(\mathbfit{m}_{\td}^{\kd})\mathbfit{x}_{\td-1}^{\kd} + B(\mathbfit{m}_{\td}^{\kd})\phi_{\td-1}^{\kd}(s_{\mathrm{x}},s_{\mathrm{y}}) \Theta + G(\mathbfit{m}_{\td}^{\kd})\mathbfit{w}_{\td-1}^{\kd}, \\
+\mathbfit{w}_{\td}^{\kd} &\sim \mathcal{N}(0,Q(\mathbfit{m}_{\td}^{\kd})), \\
+\mathbfit{m}_{\td}^{\kd} &\in \left\lbrace M^1,M^2,M^3\right\rbrace .
+\end{split}
 \end{equation*}
 \begin{columns}
-	\begin{column}{0.55\textwidth}
-	\footnotesize{
+	\begin{column}{0.45\textwidth}
+		\centering
+	\small{
 	Cell modes:
 	\begin{align*}
 	M^1&: A = \left[\begin{array}{cc}
@@ -475,56 +465,43 @@ Relaxed assumptions:
 \end{columns}
 \end{frame}
 
-%\begin{frame}{Jump Markov Linear System}
-%\begin{columns}
-%\begin{column}{0.6\textwidth}
-%\scalebox{0.8}{\input{Tikzes/Markov_chain_switch.tikz}}
-%\end{column}
-%\begin{column}{0.4\textwidth}
-%\begin{itemize}
-%	\item \textit{k} - cell index
-%	\item t - time 
-%	\item $\pi_j$ - probability of $M^j$ at time $t = 0$
-%	\item $\phi_{ij}$ - probability of transitioning from $M^i$ to $M^j$
-%	\item $\psi_j$ - probability of state $x^{k}_{t}$	
-%\end{itemize}
-%\end{column}
-%\end{columns}
-%\end{frame}
-%
-%
 \begin{frame}{Inference framework}
 \begin{figure}
-\centering
-\begin{tikzpicture}[->, >=stealth', auto, semithick, node distance=5em]
-\tikzstyle{block} = [rectangle, draw, fill=white, 
-text width=7em, text centered, rounded corners, minimum height=2em]
-\tikzstyle{line} = [draw, -latex']	
-\node[block,align=center] at (1.5,7) (A1){\small Neutrophil tracking \\ data};
-\node[block,align=center] at (1.5,4.8) (A2){\small Parametrised model \\ of the field};
-\node[block,align=center] at (1.5,2.3) (A3){\small Set of SSMs describing\\ cell dynamics \\ $\{M^1, M^2, M^3\}$};
-\node[align=center] at (5.75,6) (A4){\small Inference framework\footnote{\scriptsize{The framework is derived and validated on MC simulations in Chapter 4.}}};
-\node[block,align=center] at (5.75,5) (A5){\small  IMM smoother for $\mathcal{X},\mathcal{M}$};
-\node[block,align=center] at (5.75,3.5) (A6){\small ML inference for $\Theta$};
-\node[block,align=center] at (10,5.45) (A7){\small Inferred shape of the\\chemoattractant field};
-\node[block,align=center] at (10,3.2) (A8){\small Decision about\\ the cell mode\\ at each time};
-\draw[red] (3.75,6.5) rectangle (7.75,2.7);
-\node at (5.75,6.35) (A9){};
-\node at (5.75,2.85) (A10){};
-\node at (3.9,4.8) (A11){};
-\node at (7.6,5.45) (A12){};
-\node at (7.6,3.2) (A13){};
-%% arrows
-\draw (A1) -| (A9); 
-\draw (A2) -- (A11); 
-\draw (A3) -| (A10); 
-\draw (A12) -- (A7); 
-\draw (A13) -- (A8); 
-\path
-(A5.east) edge[dashed,bend left=30] (A6.east);
-\path
-(A6.west) edge[dashed,bend left=30] (A5.west);
-\end{tikzpicture}
+	\centering
+	\begin{tikzpicture}[->, >=stealth', auto, semithick, node distance=5em]
+	\tikzstyle{block} = [rectangle, draw, fill=white, 
+	text width=7em, text centered, rounded corners, minimum height=2em]
+	\tikzstyle{line} = [draw, -latex']	
+	\node[block,align=center] at (1.5,6.2) (A1){\includegraphics[width=.95\textwidth]{Figures/tracks_3.png}};
+	\node[block,align=center] at (1.5,4.45) (A2){$\{M^1, M^2, M^3\}$};
+	\node[block,align=center] at (1.5,2.8) (A3){\includegraphics[width=.95\textwidth]{Figures/grid.png}};
+	\node[align=center] at (5.75,6.9) (A4){\small Approximate ML framework};
+	\node[block,align=center] at (5.6,5.9) (A5){\small  MM smoother $\mathcal{X},\mathcal{M} \mid \hat{\Theta}^{i}$};
+	\node[block,align=center] at (5.6,4.4) (A15){\small Forecasting $\mathcal{S} \mid \mathcal{X}, \hat{\Theta}^{i}$};
+	\node[block,align=center] at (5.6,2.8) (A6){\footnotesize $\hat{\Theta}^{i+1} = \arg \underset{\Theta}{\max} \tilde{\mathcal{Q}}(\mathcal{X},\mathcal{M},\mathcal{S})$};
+	\node[block,align=center] at (10,5.8) (A7){\only<1>{\includegraphics[width=.95\textwidth]{Figures/pruned_field_fish3.png}}\only<2>{\includegraphics[width=.95\textwidth]{Figures/field_3.png}}};
+	\node[block,align=center] at (10,3.25) (A8){\only<1>{\includegraphics[width=.95\textwidth]{Figures/pruned_tracks_fish3.png}}\only<2>{\includegraphics[width=.95\textwidth]{Figures/mode1_fish3.png}}};
+	\draw[line width=0.5mm,cyan!70!black] (3.55,7.3) rectangle (7.95,1.8);
+	\node at (3.7,6.2) (A9){};
+	\node at (3.7,2.8) (A10){};
+	\node at (3.7,4.45) (A11){};
+	\node at (7.8,5.8) (A12){};
+	\node at (7.8,3.25) (A13){};
+	%% arrows
+	\draw (A1) -- (A9); 
+	\draw (A2) -- (A11); 
+	\draw (A3) -- (A10); 
+	\draw (A12) -- (A7); 
+	\draw (A13) -- (A8); 
+%	\path
+%	(A5.east) edge[dashed,bend left=30] (A6.east);
+	\path
+	(A5.south) edge[dashed] (A15.north);
+	\path
+	(A15.south) edge[dashed] (A6.north);
+	\path
+	(A6.east) edge[dashed,bend right=30] (A5.east);
+	\end{tikzpicture}
 \end{figure}
 \end{frame}
 
@@ -533,21 +510,21 @@ text width=7em, text centered, rounded corners, minimum height=2em]
 \begin{columns}
 	\begin{column}{0.31\textwidth}
 		\vspace{-0.2cm}
-		\includegraphics[scale=0.19]{Figures/mode1_fish1.png}\vfil
+		\includegraphics[scale=0.18]{Figures/mode1_fish1.png}\vfil
 		\vspace{0.2cm}
-		\includegraphics[scale=0.19]{Figures/mode1_fish3.png}
+		\includegraphics[scale=0.18]{Figures/mode1_fish3.png}
 	\end{column}
 	\begin{column}{0.31\textwidth}
 		\vspace{-0.2cm}
-		\includegraphics[scale=0.19]{Figures/mode2_fish1.png}\vfil
+		\includegraphics[scale=0.18]{Figures/mode2_fish1.png}\vfil
 		\vspace{0.2cm}
-		\includegraphics[scale=0.19]{Figures/mode2_fish3.png}
+		\includegraphics[scale=0.18]{Figures/mode2_fish3.png}
 	\end{column}
 	\begin{column}{0.31\textwidth}
 		\vspace{-0.2cm}
-		\includegraphics[scale=0.19]{Figures/mode3_fish1.png}\vfil
+		\includegraphics[scale=0.18]{Figures/mode3_fish1.png}\vfil
 		\vspace{0.2cm}
-		\includegraphics[scale=0.19]{Figures/mode3_fish3.png}
+		\includegraphics[scale=0.18]{Figures/mode3_fish3.png}
 	\end{column}
 \end{columns}
 \begin{columns}
@@ -657,51 +634,70 @@ text width=7em, text centered, rounded corners, minimum height=2em]
 		\includegraphics[scale=0.137]{Figures/mode3_rev9.png}
 	\end{column}
 \end{columns}
+\begin{columns}
+	\centering
+	\begin{column}{0.31\textwidth}
+		\centering
+		\footnotesize{ a) $p(M^1)$}
+	\end{column}
+	\begin{column}{0.31\textwidth}
+		\centering
+		\footnotesize{ b)  $p(M^2)$}
+	\end{column}
+	\begin{column}{0.31\textwidth}
+		\centering
+		\footnotesize{ c)  $p(M^3)$}
+	\end{column}
+\end{columns}
 \vspace{0.5cm}
 For 4 datasets there is higher probability of neutrophils diffusing away from the wound.
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Estimating cell morphodynamics}
 \subsection{Problem statement}
 \begin{frame}
-\begin{columns}
-	\begin{column}{0.6\textwidth}
-		\centering
-		\includegraphics[scale=0.21]{Figures/sensing_neutrophil.png}
-		\vfil		
-	\end{column}
-	\begin{column}{0.38\textwidth}
-		\centering
-		\scalebox{1}{	\input{Tikzes/RDS3.tikz}}
-		\vfil
-	\end{column}
-\end{columns}
-\bigskip
-\uncover<2->{Does PIP$_3$ activate pseudopod growth?}
-\end{frame}
-\begin{frame}{Data}\centering
-\includegraphics[scale=0.2]{Figures/motile_cell_t10.png}
+\centering
+\scalebox{1}{\input{Tikzes/RDS3.tikz}}
 \vfil
-\includegraphics[scale=0.2]{Figures/motile_cell_t11.png}
+\invisible<1-3>{Does PIP$_3$ activate pseudopod growth in migrating neutrophils?}
+\invisible<1-4>{Does PIP$_3$ activate pseudopod growth in migrating neutrophils?}
+\end{frame}
+\begin{frame}
+\centering
+\begin{tikzpicture}
+\node[text width=8em,text centered] at (0,0) {\includegraphics[width=\textwidth]{Figures/fr_1.eps}};
+\node[text width=8em,text centered] at (3,0) {\includegraphics[width=\textwidth]{Figures/fr_2.eps}};
+\node[text width=8em,text centered] at (6,0) {\includegraphics[width=\textwidth]{Figures/fr_3.eps}};
+\node[text width=8em,text centered] at (9,0) {\includegraphics[width=\textwidth]{Figures/fr_4.eps}};
+\node[text width=8em,text centered] at (0,-3) {\includegraphics[width=\textwidth]{Figures/fr_5.eps}};
+\node[text width=8em,text centered] at (3,-3) {\includegraphics[width=\textwidth]{Figures/fr_6.eps}};
+\node[text width=8em,text centered] at (6,-3) {\includegraphics[width=\textwidth]{Figures/fr_7.eps}};
+\node[text width=8em,text centered] at (9,-3) {\includegraphics[width=\textwidth]{Figures/fr_8.eps}};
+\end{tikzpicture}
 \end{frame}
 \begin{frame}{Defining assumptions}
 \begin{itemize}
 	\item PIP$_3$ is the only activator regulating the cell membrane protrusion.
-	\item The integrated fluorescence intensity obtained from the imaging data is proportional to the local PIP$_3$ concentration.
-	\item Local shape change is fully described by normal velocity.
+	\item The integrated 
+fluorescence intensity obtained from the imaging data is proportional to the local PIP$_3$ concentration.
+	\item Local shape change is fully described by the evolution of local normal velocity.
+	\begin{equation*}
+	\mathbfit{v}_{\td+1}^{k} = \mathbfit{v}_{\td}^{k} + \frac{1}{m} \mathcal{F}.
+	\end{equation*}
 	\item The cell is flat.
 \end{itemize}
 \end{frame}
 \subsection{Methods}
 \begin{frame}{Forces acting on cell boundary}
-\vspace{-0.5cm}
 \begin{equation*}
 \mathcal{F} = (\mathcal{F}_{\textrm{visc}} + \mathcal{F}_{\textrm{pro}} + \mathcal{F}_{\textrm{ten}} + \mathcal{F}_{\textrm{vol}})\nu,
 \end{equation*}
 \begin{itemize}
-	\item \textbf{\textit{Protrusive force}} proportional to concentration of species active along the cell boundary: \begin{equation*}
+	\item \textbf{\textit{Protrusive force}} caused by acting regulators along the membrane: \begin{equation*}
 	\mathcal{F}_{\textrm{pro}} = \alpha_{\textrm{pro}}a_{\td}^{k}.
 	\end{equation*}
-	\item \textbf{\textit{Surface tension}} corresponds to surface energy that prevents cell membrane from stretching:
+	\item \textbf{\textit{Surface tension}} prevents cell membrane from stretching:
 	\begin{equation*}
 	\mathcal{F}_{\textrm{ten}} = \alpha_{\textrm{ten}} \kappa_{\td}^{k}.
 	\end{equation*} 
@@ -740,46 +736,12 @@ $\mathbfit{u}_{\td}^{k} =\left[  a_{\td}^{k}, \kappa_{\td}^{k}, \Delta\mathcal{A
 \end{itemize}
 \end{frame}
 
-
-%\begin{frame}
-%\begin{columns}
-%	\begin{column}{0.5\textwidth}
-%		\begin{figure}
-%			\scalebox{0.8}{\input{Tikzes/vertnormals.tikz}}
-%			\caption{\small Cell normals.} 
-%		\end{figure}
-%	\end{column}
-%	\begin{column}{0.5\textwidth}
-%		\begin{figure}
-%			\scalebox{0.8}{\input{Tikzes/area1.tikz}}
-%			\caption{Cell area computation.} 
-%		\end{figure}
-%	\end{column}
-%\end{columns}
-%\end{frame}
-
-
-
-%\begin{frame}
-%\begin{columns}
-%	\begin{column}{0.5\textwidth}
-%		\begin{figure}
-%			\scalebox{0.6}{\input{Tikzes/normvelt3.tikz}}
-%			\vfil
-%			\scalebox{0.6}{\input{Tikzes/normvelt4.tikz}}
-%			\caption{\small Normal velocities.} 
-%		\end{figure}
-%	\end{column}
-%	\begin{column}{0.5\textwidth}
-%		\begin{figure}
-%			\scalebox{0.465}{\includegraphics{Figures/curv3.eps}}
-%			\vfil
-%			\scalebox{0.465}{\includegraphics{Figures/curv4.eps}}
-%			\caption{\footnotesize Local curvature.} 
-%		\end{figure}
-%	\end{column}
-%\end{columns}
-%\end{frame}
+\begin{frame}{Image processing}
+\centering
+\includegraphics[scale=0.2]{Figures/motile_cell_t10.png}
+\vfil
+\includegraphics[scale=0.2]{Figures/motile_cell_t11.png}
+\end{frame}
 
 \subsection{Selected results}
 \begin{frame}{Motile cells observed in vivo}
@@ -788,19 +750,19 @@ $\mathbfit{u}_{\td}^{k} =\left[  a_{\td}^{k}, \kappa_{\td}^{k}, \Delta\mathcal{A
 		\centering
 		\scalebox{0.6}{\input{Tikzes/histogram7.tikz}}	
 	\end{column}
-	\begin{column}{0.52\textwidth}
+	\begin{column}{0.5\textwidth}
 		\centering
 		\begin{itemize}
-			\item Very weak correlation between between $a_{\td-1}^{k}$ and $\mathbfit{v}_{\td}^{k}$;
-			\item Correlation coefficients are inconsistent for different cells in the same set;
-			\item Mann-Whitney test results: on average, higher concentration of PIP$_3$ accelerates protrusion growth, but does not activate it.
+			\item Very weak correlation between between $a_{\td-1}^{k}$ and $\mathbfit{v}_{\td}^{k}$ for all cells;
+			\item PIP$_3$ does not activate protrusion growth;
+			\item Mann-Whitney test results: on average, higher concentrations of PIP$_3$ accelerate protrusion growth.
 		\end{itemize}
 	\end{column}
 \end{columns}
 \end{frame}
 \begin{frame}{Motile cells observed in vivo}
 \begin{columns}
-	\begin{column}{0.5\textwidth}
+	\begin{column}{0.35\textwidth}
 		\centering
 		\includegraphics[scale=0.3]{Figures/m4_akt.png}\vfil
 		\footnotesize{a) Smoothed intensity.}
@@ -808,7 +770,7 @@ $\mathbfit{u}_{\td}^{k} =\left[  a_{\td}^{k}, \kappa_{\td}^{k}, \Delta\mathcal{A
 		\includegraphics[scale=0.3]{Figures/m4_curvature.png}\vfil	
 		\footnotesize{a) Local curvature.}
 	\end{column}
-	\begin{column}{0.5\textwidth}
+	\begin{column}{0.35\textwidth}
 		\centering
 		\includegraphics[scale=0.3]{Figures/m4_estimated_velocity.png}\vfil
 		\footnotesize{c) Estimated velocity.}
@@ -820,13 +782,13 @@ $\mathbfit{u}_{\td}^{k} =\left[  a_{\td}^{k}, \kappa_{\td}^{k}, \Delta\mathcal{A
 \end{frame}
 \begin{frame}{Polarised cell observed in vitro}
 \centering
-\includegraphics[scale=0.4]{Figures/in_vitro_cell.png}
+\includegraphics[scale=0.385]{Figures/in_vitro_cell.png}
 \vfil
-\includegraphics[scale=0.2]{Figures/normally_polarised_t9.png}
+\includegraphics[scale=0.195]{Figures/normally_polarised_t9.png}
 \end{frame}
 \begin{frame}{Polarised cell observed in vitro}
 \begin{columns}
-	\begin{column}{0.5\textwidth}
+	\begin{column}{0.35\textwidth}
 	\centering
 	\includegraphics[scale=0.3]{Figures/polarised_smoothed_akt.png}\vfil
 	\footnotesize{a) Smoothed intensity.}
@@ -834,7 +796,7 @@ $\mathbfit{u}_{\td}^{k} =\left[  a_{\td}^{k}, \kappa_{\td}^{k}, \Delta\mathcal{A
 	\includegraphics[scale=0.3]{Figures/polarised_curvature.png}\vfil	
 	\footnotesize{a) Local curvature.}
 \end{column}
-\begin{column}{0.5\textwidth}
+\begin{column}{0.35\textwidth}
 	\centering
 	\includegraphics[scale=0.3]{Figures/polarised_estimated_velocity.png}\vfil
 	\footnotesize{c) Estimated velocity.}
@@ -851,14 +813,14 @@ $\mathbfit{u}_{\td}^{k} =\left[  a_{\td}^{k}, \kappa_{\td}^{k}, \Delta\mathcal{A
 \subsection{Contributions}
 \begin{frame}{Technical contributions}
 \begin{itemize}
-	\item A reconfigurable hybrid model of individual cell dynamics that incorporates the influence of the global chemoattractant environment.
-	\item A statistical framework for simultaneous inference of the global chemoattractant environment and cell behavioural modes from cell tracking data.
+	\item A reconfigurable hybrid model of individual cell dynamics that incorporates the influence of the global  environment.
+	\item A statistical framework for simultaneous inference of the global chemoattractant environment and cell behavioural modes.
 	\item An image processing and estimation framework that links local cell boundary evolution to observed subcellular concentrations.
 \end{itemize}
 \end{frame}
 \begin{frame}{Contributions in field of application}
 \begin{itemize}
-	\item Investigation of cell-environment interaction on different stages of inflammation.
+	\item Investigation of neutrophil-environment interaction on different stages of inflammation.
 	\item Quantitative evidence that the dominant mode of neutrophil reverse migration is random walk.
 	\item Quantitative evidence that PIP$_3$ does not activate protrusions but accelerates existing leading edges in cells performing chemotaxis.
 \end{itemize}
