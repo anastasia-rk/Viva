@@ -87,7 +87,8 @@
 \institute[ACSE,TUoS]{\inst{1}
   Department of Automatic Control and Systems Engineering\\
   The University of Sheffield}
-\date[21/06/2019]{21 June 2019}
+%\date[21/06/2019]{21 June 2019}
+\date{\today}
 
 \pgfdeclareimage[height=1cm]{university-logo}{UoSarms.pdf}
 \logo{\pgfuseimage{university-logo}}
@@ -111,29 +112,83 @@
 \section[Background]{Background \& Motivation}
 \subsection{Neutrophils in inflammation}
 \begin{frame}
-
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[->, >=stealth', auto, semithick, node distance=5em]
+	\tikzstyle{block} = [rectangle, draw, fill=white, 
+	text width=10em, text centered, rounded corners, minimum height=2em]
+	\tikzstyle{line} = [draw, -latex']
+	\draw[line width=0.5mm,cyan!90!black,fill=cyan!90!black,text centered, rounded corners] (0,7) rectangle (4.8,0);
+	\draw[line width=0.5mm,cyan!70!black,fill=cyan!70!black,text centered, rounded corners] (5.7,7) rectangle (10.5,0);
+	\node[align=center,text=white] at (2.4,6.5) (A2){Experimental studies};
+	\node[align=center,text=white] at (8.1,6.5) (A2){Mathematical models};
+	\draw[>=triangle 45,draw=cyan!50!black,line width=1pt, <->] (4.8,6.5) -- (5.7,6.5);	
+	\invisible<1-4>{\node[block,align=center] at (2.4,1) (A1){\small Sensing to motion\\ via subcellular signals};}
+	\invisible<1-3>{\node[block,align=center] at (2.4,2.5) (A2){\small Resolution via \\reverse migration};}
+	\invisible<1-2>{\node[block,align=center] at (2.4,4) (A3){\small \textit{in vivo} microscopy on zebrafish larvae};}
+	\invisible<1>{\node[block,align=center] at (2.4,5.5) (A4){\small Recruitment via chemotaxis};}
+	\invisible<1-8>{\node[block,align=center] at (8.1,1) (A5){\small Morphodynamics as intermediate level};}
+	\invisible<1-7>{\node[block,align=center] at (8.1,2.5) (A6){\small RDS models for subcellular species};}
+	\invisible<1-6>{\node[block,align=center] at (8.1,4) (A7){\small Random walk models for single cells};}
+	\invisible<1-5>{\node[block,align=center] at (8.1,5.5) (A8){\small RDS models for populations};}
+	\end{tikzpicture}
+\end{figure}
 \end{frame}
 \subsection{Identified gaps in literature}
 \begin{frame}
-\vspace{0.2cm}
-\centering
-\only<1>{\large{Common concept:\\ Complicated model $\rightarrow$ Realistic simulations.}}\only<2>{\large{Systematic approach:\\ Simplified models $\rightarrow$ Linking to data $\rightarrow$ Meaningful perditions.}}
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[->, >=stealth', auto, semithick, node distance=5em]
+	\tikzstyle{block} = [rectangle, draw, fill=white, 
+	text width=10em, text centered, rounded corners, minimum height=2em]
+	\tikzstyle{line} = [draw, -latex']
+	\draw[line width=0.5mm,cyan!90!black,fill=cyan!90!black,text centered, rounded corners] (0,7) rectangle (4.8,0);
+	\draw[line width=0.5mm,cyan!70!black,fill=cyan!70!black,text centered, rounded corners] (5.7,7) rectangle (10.5,0);
+	\node[align=center,text=white] at (2.4,6.5) (A2){Experimental studies};
+	\node[align=center,text=white] at (8.1,6.5) (A2){Mathematical models};
+	\draw[>=triangle 45,draw=cyan!50!black,line width=1pt, <->] (4.8,6.5) -- (5.7,6.5);	
+	\node[block,align=center] at (2.4,1) (A1){\small{Sensing to motion\\ via subcellular signals}};
+	\node[block,align=center] at (2.4,2.5) (A2){\small{Resolution via \\reverse migration}};
+	\node[block,align=center] at (2.4,4) (A3){\small \textit{in vivo} microscopy on zebrafish larvae};
+	\node[block,align=center] at (2.4,5.5) (A4){\small Recruitment via chemotaxis};
+	\node[block,align=center] at (8.1,1) (A5){\small Morphodynamics as intermediate level};
+	\node[block,align=center] at (8.1,2.5) (A6){\small RDS models for subcellular species};
+	\node[block,align=center] at (8.1,4) (A7){\small Random walk models for single cells};
+	\node[block,align=center] at (8.1,5.5) (A8){\small RDS models for populations};
+	\invisible<1>{\node[circle,draw=red,fill=white,align=center] at (5.25,6) (A0){!!!};}
+	\invisible<1-2>{\node[ellipse,draw=red,fill=white,align=center] at (2.4,4) (A10){\small Environment \\ \small unobserved};}
+	\invisible<1-3>{\node[ellipse,draw=red,fill=white,align=center] at (2.4,2.5) (A9){\small Random walk \\\small or fugetaxis?};}
+	\invisible<1-4>{\node[ellipse,draw=red,fill=white,align=center] at (8.1,4) (A11){\small RWs do not reflect \\ \small global environent};}
+	\invisible<1-5>{\node[ellipse,draw=red,fill=white,align=center] at (8.1,1.75) (A11){\small Models not\\ \small informed by \\ \small experimental data};}
+	\invisible<1-6>{\node[ellipse,draw=red,fill=white,align=center] at (8.1,1.75) (A11){\small Not informed \\by data};}
+	\end{tikzpicture}
+\end{figure}
 \end{frame}
 \subsection{Research Objectives}
 \begin{frame}
-Objectives:
-\begin{itemize}
-	\item Develop a dynamical model that describes cell interaction with the global environment.
-	\item Data-driven estimation of global chemoattractant concentration and cell behavioural modes.
-	\item Parameter estimation of neutrophil morphodynamics model.
-\end{itemize}
-\vspace{0.3cm}
-Restrictions:
-  \begin{itemize}
-  	\item Minimise prior assumptions about the shape of the environment.
-  	\item Minimise prior assumptions about the subcellular regulators.
-  	\item Ensure identifiability of models. 
-  	\end{itemize}
+\begin{center}
+\only<1>{\large{Common concept:\\ Complicated model $\rightarrow$ Realistic simulations.\\}}\only<2-3>{\large{Systematic approach:\\ Simplified models $\rightarrow$ Linking to data $\rightarrow$ Meaningful perditions.\\}}
+\end{center}
+\invisible<1-2>{Objectives:
+	\begin{itemize}
+		\item Develop a dynamical model that describes cell interaction with the global environment.
+		\item Data-driven estimation of global chemoattractant concentration and cell behavioural modes.
+		\item Parameter estimation of neutrophil morphodynamics model.
+\end{itemize}}
+%\only<3>{Objectives:
+%\begin{itemize}
+%	\item Develop a dynamical model that describes cell interaction with the global environment.
+%	\item Data-driven estimation of global chemoattractant concentration and cell behavioural modes.
+%	\item Parameter estimation of neutrophil morphodynamics model.
+%\end{itemize}}
+%\vspace{0.2cm}
+%\uncover<4->{
+%Restrictions:
+%  \begin{itemize}
+%  	\item Minimise prior assumptions about the shape of the environment.
+%  	\item Minimise prior assumptions about the subcellular regulators.
+%  	\item Ensure identifiability of models. 
+%  	\end{itemize}}
 \end{frame}
 %% Chapters 3-5
 \section{Environment inference: homogeneous cell behaviour}
@@ -656,7 +711,7 @@ For 4 datasets there is higher probability of neutrophils diffusing away from th
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Estimating cell morphodynamics}
 \subsection{Problem statement}
-\begin{frame}
+\begin{frame}{Signal to migration}
 \centering
 \scalebox{1}{\input{Tikzes/RDS3.tikz}}
 \vfil
@@ -675,17 +730,17 @@ For 4 datasets there is higher probability of neutrophils diffusing away from th
 \node[text width=8em,text centered] at (6,-3) {\includegraphics[width=\textwidth]{Figures/fr_7.eps}};
 \node[text width=8em,text centered] at (9,-3) {\includegraphics[width=\textwidth]{Figures/fr_8.eps}};
 \end{tikzpicture}
-\end{frame}
+\end{frame}{Data}
 \begin{frame}{Defining assumptions}
 \begin{itemize}
-	\item PIP$_3$ is the only activator regulating the cell membrane protrusion.
+	\item PIP$_3$ is the only activator regulating cell membrane protrusions.
 	\item The integrated 
 fluorescence intensity obtained from the imaging data is proportional to the local PIP$_3$ concentration.
+	\item The cell is a 2-D curve $\Gamma_{\td}$.
 	\item Local shape change is fully described by the evolution of local normal velocity.
 	\begin{equation*}
-	\mathbfit{v}_{\td+1}^{k} = \mathbfit{v}_{\td}^{k} + \frac{1}{m} \mathcal{F}.
+	\mathbfit{v}_{\td+1}^{k} = \mathbfit{v}_{\td}^{k} + \frac{1}{m} \mathcal{F} + \mathbfit{w}_{\td}.
 	\end{equation*}
-	\item The cell is flat.
 \end{itemize}
 \end{frame}
 \subsection{Methods}
@@ -714,7 +769,11 @@ $\quad$\\
 $\quad$
 \end{frame}
 \begin{frame}{State space model}
-Cell boundary is represented by a discrete polygon with $K$ vertexes. Local evolution for each vertex:
+\vspace{-0.5cm}
+\begin{equation*}
+\Gamma_{\td}: \mathrm{s}_{\td}^{k}, \quad k = 1, \dots, K.
+\end{equation*}
+Local evolution for the node $\mathrm{s}_{\td}^{k}$:
 \begin{equation*}
 \mathbfit{v}_{\td+1}^{k} = A\mathbfit{v}_{\td}^{k} + B\mathbfit{u}_{\td}^{k}+ \mathbfit{w}_{\td}^{k}, \quad \mathbfit{w}{\td}^{k} \sim \mathcal{N}(0,Q).
 \end{equation*}
