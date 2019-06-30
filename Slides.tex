@@ -185,25 +185,25 @@
 \begin{columns}
 	\begin{column}{0.55\textwidth}
 		\centering
-		\only<1>{\includegraphics[scale=0.35]{Figures/track_k.png}}\only<2-4>{\includegraphics[scale=0.35]{Figures/track_k_time_t.png}}\only<5->{\includegraphics[scale=0.35]{Figures/track_filed.png}}
+		\only<1-2>{\includegraphics[scale=0.35]{Figures/track_k.png}}\only<3>{\includegraphics[scale=0.35]{Figures/track_k_time_t.png}}\only<4->{\includegraphics[scale=0.35]{Figures/track_filed.png}}
 	\end{column}
 	\begin{column}{0.42\textwidth}
 		Time series data:
 		\begin{itemize}
-			\item<1-> $K$ tracks: $\mathcal{Y} = \{\mathbf{y}^{k} \}^{K}_{k=1}$
-			\item<2-> Single track: $\mathbf{y}^{k} = \{ \mathbfit{y}^{k}_{t}\}^{T^k}_{t=1}$
-			\item<3-> Single data point: $\mathbfit{y}^{k}_{t} = \left[ \bar{s}_{\mathrm{x}}, \bar{s}_{\mathrm{y}} \right]^{\top}$
+			\item<1-> $\K$ tracks: $\mathcal{Y} = \{\mathbf{y}^{\kd} \}^{\K}_{\kd=1}$
+			\item<2-> Single track: $\mathbf{y}^{\kd} = \{ \mathbfit{y}^{\kd}_{\td}\}^{\T^{\kd}}_{\td=1}$
+			\item<3-> Single data point: $\mathbfit{y}^{\kd}_{\td} = \left[ \bar{s}_{\mathrm{x}}, \bar{s}_{\mathrm{y}} \right]^{\top}$
 %			\item<4-> Full state: $\mathbfit{x}^{k}_{t} = \left[ s_{\mathrm{x}}, s_{\mathrm{y}}, v_{\mathrm{x}}, v_{\mathrm{y}} \right]^{\top}$
 			\item<4-> Environment influence:
-			$\mathbfit{u}^{k}_{t} = \mathbfit{u}^{k}_{t}(\mathbfit{s}) = \nabla \mathcal{U}(\mathbfit{s}).$
+			$\mathbfit{u}^{\kd}_{\td}  = \mathbfit{u}^{\kd}_{\td} (\mathbfit{s}) = \nabla \mathcal{U}(\mathbfit{s}).$
 		\end{itemize}
 	\end{column}
 \end{columns}
 \bigskip
-\invisible<1-5>{1. Develop a parametrised finite-order model of global $\mathcal{U}(\mathbfit{s})$.\\}
+\invisible<1-4>{1. Develop a parametrised finite-order model of global $\mathcal{U}(\mathbfit{s})$.\\}
 \bigskip
-\invisible<1-6>{2. Estimate unobserved $\mathcal{U}(\mathbfit{s})$ from localised tracking data $\mathcal{Y}$.}
-\invisible<1-7>{\tiny{2. Estimate unobserved $\mathcal{U}(\mathbfit{s})$ from localised tracking data $\mathcal{Y}$.}}
+\invisible<1-5>{2. Estimate unobserved $\mathcal{U}(\mathbfit{s})$ from localised tracking data $\mathcal{Y}$.}
+\invisible<1-6>{\tiny{2. Estimate unobserved $\mathcal{U}(\mathbfit{s})$ from localised tracking data $\mathcal{Y}$.}}
 \end{frame}
 \begin{frame}{Defining assumptions}
 \begin{itemize}
